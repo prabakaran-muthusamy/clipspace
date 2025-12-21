@@ -22,7 +22,7 @@ struct DetailPopoverView: View {
                     .foregroundColor(.secondary)
             }
             
-            Text("Saved at: \(clip.createdAt.formatted())")
+            Text("Saved at: \(clip.createdAt.formatted(.dateTime.hour().minute().second()))")
                 .font(.caption2)
                 .foregroundColor(.gray)
         }

@@ -23,33 +23,28 @@ struct ClippingRow: View {
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            Spacer()
-            Button(action: { viewModel.togglePin(clip) }) {
+            
+            Button {
+                viewModel.togglePin(clip)
+            } label: {
                 Image(systemName: clip.isPinned ? "pin.fill" : "pin")
             }
-            .buttonStyle(.borderless)
+            .buttonStyle(.plain)
         }
         .padding(4)
         .background(
             RoundedRectangle(cornerRadius: 4)
-                .fill(viewModel.selectedIndex == index ? Color(hex: "#094E9C") : Color.clear)
+                .fill(viewModel.hoveredClip?.id == clip.id ? Color(hex: "#094E9C") : Color.clear)
         )
         .contentShape(Rectangle())
         .onTapGesture {
-            viewModel.selectedIndex = index
             viewModel.selection = clip
             PasteService.paste(clip, asPlain: viewModel.pasteAsPlainText)
-            // Close the menu bar window only (not hide the entire app)
             NSApp.keyWindow?.performClose(nil)
         }
         .onHover { hovering in
-            if hovering {
-                viewModel.setHoveredClip(clip)
-            } else {
-                viewModel.setHoveredClip(nil)
-            }
+            viewModel.setHoveredClip(hovering ? clip : nil)
         }
     }
 }
-
 

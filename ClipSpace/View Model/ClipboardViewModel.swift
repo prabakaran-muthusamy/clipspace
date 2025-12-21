@@ -36,21 +36,42 @@ final class ClipboardViewModel: ObservableObject {
         reload()
     }
     
-    func togglePin(_ clip: Clipping) {
-        // Your pin logic...
+    func reload() {
+        clippings = repository.fetch(query: query)
     }
     
-    func deleteAll() {
-        // Your delete logic...
+    func togglePin(_ clip: Clipping) {
+        var updated = clip
+        updated.isPinned.toggle()
+        repository.update(updated)
         reload()
     }
     
-    func updatePasteMode(_ flag: Bool) {
-        pasteAsPlainText = flag
+    func delete(_ clip: Clipping) {
+        repository.delete(id: clip.id)
+        reload()
     }
     
-    func reload() {
-        clippings = repository.fetch(query: query)
+    func deleteAll() {
+        repository.deleteAll()
+        reload()
+    }
+    
+    func pasteSelected() {
+        guard let sel = selection else { return }
+        PasteService.paste(sel, asPlain: pasteAsPlainText)
+    }
+    
+    func pasteAtIndex(_ index: Int) {
+        guard clippings.indices.contains(index) else { return }
+        PasteService.paste(clippings[index], asPlain: pasteAsPlainText)
+    }
+    
+    func updatePasteMode(_ asPlain: Bool) {
+        pasteAsPlainText = asPlain
+        var s = settingsStore.load()
+        s.pasteAsPlainText = asPlain
+        settingsStore.save(s)
     }
     
     func setHoveredClip(_ clip: Clipping?) {
@@ -71,10 +92,10 @@ final class ClipboardViewModel: ObservableObject {
 }
 
 extension ClipboardViewModel {
-    // Dynamic content height used to size the window initially
     var contentHeight: CGFloat {
-        let rowHeight: CGFloat = 28   // tune to match your row layout
-        let basePadding: CGFloat = 96 // search + footer + spacing
-        return CGFloat(clippings.count) * rowHeight + basePadding
+        let rowHeight: CGFloat = 28
+        let basePadding: CGFloat = 60
+        let count = clippings.count
+        return CGFloat(count) * rowHeight + basePadding
     }
 }

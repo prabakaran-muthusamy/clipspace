@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E134C6772EF7FAF00056153E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E134C6732EF7FAF00056153E /* Assets.xcassets */; };
 		E134C6782EF7FAF00056153E /* ClipSpaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134C6742EF7FAF00056153E /* ClipSpaceApp.swift */; };
-		E134C6792EF7FAF00056153E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134C6752EF7FAF00056153E /* ContentView.swift */; };
 		E134C6872EF7FB8B0056153E /* Hotkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134C6852EF7FB8B0056153E /* Hotkey.swift */; };
 		E134C6882EF7FB8B0056153E /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134C6822EF7FB8B0056153E /* AppSettings.swift */; };
 		E134C6892EF7FB8B0056153E /* Clipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134C6832EF7FB8B0056153E /* Clipping.swift */; };
@@ -41,7 +40,6 @@
 		E134C6652EF7FADA0056153E /* ClipSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClipSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E134C6732EF7FAF00056153E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E134C6742EF7FAF00056153E /* ClipSpaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipSpaceApp.swift; sourceTree = "<group>"; };
-		E134C6752EF7FAF00056153E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E134C6822EF7FB8B0056153E /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		E134C6832EF7FB8B0056153E /* Clipping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clipping.swift; sourceTree = "<group>"; };
 		E134C6852EF7FB8B0056153E /* Hotkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotkey.swift; sourceTree = "<group>"; };
@@ -102,6 +100,8 @@
 				E134C67A2EF7FAF90056153E /* App */,
 				E134C67B2EF7FB060056153E /* Assets */,
 				E134C67F2EF7FB530056153E /* Data */,
+				E134C6BF2EF857300056153E /* Extension */,
+				E134C6BE2EF857140056153E /* Core */,
 				E134C67E2EF7FB2C0056153E /* Model */,
 				E134C67C2EF7FB1F0056153E /* View */,
 				E134C67D2EF7FB260056153E /* View Model */,
@@ -113,7 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				E134C6742EF7FAF00056153E /* ClipSpaceApp.swift */,
-				E134C6752EF7FAF00056153E /* ContentView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -157,14 +156,9 @@
 		E134C67F2EF7FB530056153E /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				E134C68A2EF7FBA00056153E /* ClippingStoreProtocol.swift */,
-				E134C68B2EF7FBA00056153E /* PasteboardMonitorProtocol.swift */,
-				E134C68C2EF7FBA00056153E /* SettingsStoreProtocol.swift */,
 				E134C6AE2EF7FBFB0056153E /* ClippingFileStore.swift */,
 				E134C6AF2EF7FBFB0056153E /* PasteboardMonitor.swift */,
 				E134C6B02EF7FBFB0056153E /* SettingsUserDefaultsStore.swift */,
-				E134C6B12EF7FBFB0056153E /* Strings.swift */,
-				E134C6B62EF7FC040056153E /* Colors.swift */,
 				E134C6B72EF7FC040056153E /* HotkeyService.swift */,
 				E134C6B82EF7FC040056153E /* PasteService.swift */,
 			);
@@ -193,6 +187,25 @@
 				E134C6BC2EF809DC0056153E /* DetailPopoverView.swift */,
 			);
 			path = "Clipboard View";
+			sourceTree = "<group>";
+		};
+		E134C6BE2EF857140056153E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E134C68A2EF7FBA00056153E /* ClippingStoreProtocol.swift */,
+				E134C68B2EF7FBA00056153E /* PasteboardMonitorProtocol.swift */,
+				E134C68C2EF7FBA00056153E /* SettingsStoreProtocol.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		E134C6BF2EF857300056153E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E134C6B12EF7FBFB0056153E /* Strings.swift */,
+				E134C6B62EF7FC040056153E /* Colors.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,7 +306,6 @@
 				E134C6B52EF7FBFB0056153E /* PasteboardMonitor.swift in Sources */,
 				E134C6882EF7FB8B0056153E /* AppSettings.swift in Sources */,
 				E134C6892EF7FB8B0056153E /* Clipping.swift in Sources */,
-				E134C6792EF7FAF00056153E /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
