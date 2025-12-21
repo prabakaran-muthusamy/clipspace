@@ -44,28 +44,25 @@ struct ClipboardView: View {
             }
             
             // Footer controls
-            VStack {
+            VStack(alignment: .leading) {
+                Divider()
+                Button("Clear All", role: .destructive) {
+                    viewModel.deleteAll()
+                }
                 Divider()
                 HStack {
-                    Button("Clear All", role: .destructive) {
-                        viewModel.deleteAll()
-                    }
-                    Spacer()
                     Button("Preferences...") {
                         openPreferences()
-                        // Close the menu bar window without hiding the app
                         NSApp.keyWindow?.performClose(nil)
                     }
+                    Spacer()
                     Text("⌘,")
                         .foregroundColor(.secondary)
+                        .multilineTextAlignment(.trailing)
                 }
-                .padding(.horizontal, 8)
                 Divider()
-                HStack {
-                    Spacer()
-                    Button("Quit", role: .destructive) {
-                        NSApp.terminate(nil)
-                    }
+                Button("Quit", role: .destructive) {
+                    NSApp.terminate(nil)
                 }
             }
             .padding(.top, 8)

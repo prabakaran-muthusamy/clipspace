@@ -75,20 +75,22 @@ final class ClipboardViewModel: ObservableObject {
     }
     
     func setHoveredClip(_ clip: Clipping?) {
-        // Cancel any existing scheduled highlight
         hoverTask?.cancel()
+        
         guard let clip = clip else {
             hoveredClip = nil
             return
         }
-        // Schedule a delayed highlight
+        
         let task = DispatchWorkItem { [weak self] in
             DispatchQueue.main.async {
                 self?.hoveredClip = clip
             }
         }
+        
         hoverTask = task
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: task) }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: task)
+    }
 }
 
 extension ClipboardViewModel {

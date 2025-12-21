@@ -23,7 +23,7 @@ struct ClipSpaceApp: App {
     }
 
     var body: some Scene {
-        MenuBarExtra("ClipSpace", systemImage: "clipboard") {
+        MenuBarExtra("ClipSpace", systemImage: "paperclip.badge.ellipsis") {
             ClipboardView()
                 .environmentObject(clipboardVM)
         }
