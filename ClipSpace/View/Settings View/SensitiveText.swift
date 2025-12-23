@@ -14,6 +14,7 @@ struct SensitiveText: View {
     var body: some View {
         Text(isHovering ? text : String(repeating: "•", count: min(text.count, 8)))
             .lineLimit(1)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .onHover { hovering in
                 isHovering = hovering
             }

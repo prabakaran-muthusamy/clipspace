@@ -17,48 +17,47 @@ final class PasteboardMonitor: PasteboardMonitorProtocol {
     private let repository: ClippingStoreProtocol
     private let settingsStore: SettingsStoreProtocol
     private var settings: AppSettings
-
+    
     init(repository: ClippingStoreProtocol, settingsStore: SettingsStoreProtocol) {
         self.repository = repository
         self.settingsStore = settingsStore
         self.settings = settingsStore.load()
     }
-
+    
     func start() {
         timer = Timer.publish(every: 0.3, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in self?.tick() }
     }
-
+    
     func stop() {
         timer?.cancel()
     }
-
+    
     private func tick() {
         guard pb.changeCount != changeCount else { return }
-        print("Pasteboard changed")
         changeCount = pb.changeCount
-
+        
         let front = NSWorkspace.shared.frontmostApplication?.bundleIdentifier ?? ""
         if settings.excludedBundleIDs.contains(front) { return }
-
+        
         guard let str = pb.string(forType: .string),
               !str.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-        print("Captured: \(str)")
-
-        // Optional: prevent duplicates by checking last saved clipping
+        
+        // Fetch all clippings
         let existing = repository.fetch(query: nil)
-        if let last = existing.first, last.content == str {
+        
+        // Prevent duplicates: skip if any clipping already has same content
+        if existing.contains(where: { $0.content == str }) {
+            print("Duplicate ignored: \(str)")
             return
         }
-
-        // If same base but changed, allow new copy
+        
+        // Add new clipping
         let clip = Clipping(content: str, sourceAppBundleID: front)
         repository.add(clip)
         repository.prune(limit: settings.maxItems)
-
-        let all = repository.fetch(query: nil)
-        print("Copied items listed: \(all.count)") // shows count
-
+        
+        print("Copied items listed: \(repository.fetch(query: nil).count)")
     }
 }

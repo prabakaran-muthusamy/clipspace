@@ -12,7 +12,7 @@ struct ClipSpaceApp: App {
     @StateObject private var clipboardVM: ClipboardViewModel
     @StateObject private var settingsVM: SettingsViewModel
     private let monitor: PasteboardMonitor
-
+    
     init() {
         let repo = ClippingFileStore()
         let settings = SettingsUserDefaultsStore()
@@ -21,14 +21,14 @@ struct ClipSpaceApp: App {
         monitor = PasteboardMonitor(repository: repo, settingsStore: settings)
         monitor.start()
     }
-
+    
     var body: some Scene {
         MenuBarExtra("ClipSpace", systemImage: "paperclip.badge.ellipsis") {
             ClipboardView()
                 .environmentObject(clipboardVM)
         }
         .menuBarExtraStyle(.window)
-
+        
         Settings {
             SettingsView()
                 .environmentObject(settingsVM)

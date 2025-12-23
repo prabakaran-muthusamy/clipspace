@@ -9,27 +9,44 @@ import SwiftUI
 
 struct DetailPopoverView: View {
     let clip: Clipping
-
+    let date: Date = Date()
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(clip.content)
                 .font(.body)
                 .lineLimit(nil)
             
-            if let app = clip.sourceAppBundleID, !app.isEmpty {
-                Text("Copied from: \(app)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+            HStack {
+                // Left side
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Copied from")
+                        .font(.caption)
+                        .bold()
+                        .foregroundColor(.secondary)
+                    
+                    Text(clip.sourceAppBundleID ?? "Unknown")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                // Right side
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text("Copied at")
+                        .font(.caption)
+                        .bold()
+                        .foregroundColor(.secondary)
+                    
+                    Text(DateFormatterHelper.shared.formattedDate(date)) .font(.caption2) .foregroundColor(.gray) .multilineTextAlignment(.trailing) }
             }
-            
-            Text("Saved at: \(clip.createdAt.formatted(.dateTime.hour().minute().second()))")
-                .font(.caption2)
-                .foregroundColor(.gray)
         }
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color(.windowBackgroundColor))
+            //                .fill(Color(.windowBackgroundColor))
+                .fill(Color(hex: "#094E9C"))
         )
         .shadow(radius: 4)
         .frame(maxWidth: 320)

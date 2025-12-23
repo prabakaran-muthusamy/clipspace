@@ -11,15 +11,19 @@ import SwiftUI
 import Combine
 
 final class ClipboardViewModel: ObservableObject {
-    @Published var clippings: [Clipping] = []
-    @Published var selection: Clipping?
-    @Published var selectedIndex: Int? = nil
-    @Published var query: String = ""
-    @Published var pasteAsPlainText: Bool = false
     
-    // Hover state used by the detail popover
+    @Published var clippings: [Clipping] = []
+    @Published var query: String = ""
+    @Published var selection: Clipping? = nil
+    // keyboard selection
     @Published var hoveredClip: Clipping? = nil
+    // mouse hover
+    @Published var contentViewHeight: CGFloat = 600
     private var hoverTask: DispatchWorkItem?
+    
+    @Published var selectedIndex: Int? = nil
+    @Published var pasteAsPlainText: Bool = false
+    private var shouldDelayHover = true
     
     // Your existing repository and settingsStore...
     private let repository: ClippingStoreProtocol
@@ -53,8 +57,9 @@ final class ClipboardViewModel: ObservableObject {
     }
     
     func deleteAll() {
-        repository.deleteAll()
-        reload()
+        clippings.removeAll()
+        selection = nil
+        hoveredClip = nil
     }
     
     func pasteSelected() {
@@ -74,22 +79,28 @@ final class ClipboardViewModel: ObservableObject {
         settingsStore.save(s)
     }
     
+    func resetHoverDelay() {
+        shouldDelayHover = true
+    }
+    
     func setHoveredClip(_ clip: Clipping?) {
         hoverTask?.cancel()
-        
+        hoveredClip = clip
         guard let clip = clip else {
             hoveredClip = nil
             return
         }
-        
-        let task = DispatchWorkItem { [weak self] in
-            DispatchQueue.main.async {
-                self?.hoveredClip = clip
+        if shouldDelayHover {
+            let task = DispatchWorkItem { [weak self] in
+                DispatchQueue.main.async {
+                    self?.hoveredClip = clip
+                    self?.shouldDelayHover = false
+                }
             }
-        }
-        
-        hoverTask = task
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: task)
+            hoverTask = task
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: task) } else {
+                hoveredClip = clip
+            }
     }
 }
 

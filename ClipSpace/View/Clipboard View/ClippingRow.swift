@@ -14,8 +14,14 @@ struct ClippingRow: View {
     let index: Int
     @ObservedObject var viewModel: ClipboardViewModel
     
+    var isActive: Bool {
+        // Active if either keyboard selection or hover matches this row
+        (viewModel.selection?.id == clip.id) || (viewModel.hoveredClip?.id == clip.id)
+    }
+    
     var body: some View {
-        HStack {
+        HStack(spacing: 8) {
+            // Content
             if clip.content.isSensitive {
                 SensitiveText(text: clip.content)
             } else {
@@ -39,11 +45,6 @@ struct ClippingRow: View {
         .contentShape(Rectangle())
         .onTapGesture {
             viewModel.selection = clip
-            PasteService.paste(clip, asPlain: viewModel.pasteAsPlainText)
-            NSApp.keyWindow?.performClose(nil)
-        }
-        .onHover { hovering in
-            viewModel.setHoveredClip(hovering ? clip : nil)
         }
     }
 }
