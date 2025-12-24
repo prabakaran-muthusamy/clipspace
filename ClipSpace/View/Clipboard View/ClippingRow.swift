@@ -30,22 +30,32 @@ struct ClippingRow: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             
+            // Pin button
             Button {
                 viewModel.togglePin(clip)
             } label: {
-                Image(systemName: clip.isPinned ? "pin.fill" : "pin")
-            }
+                Image(systemName: clip.isPinned ? "pin.fill" : "pin") }
+            .buttonStyle(.plain)
+            
+            // Delete button
+            Button { viewModel.delete(clip)
+            } label: {
+                Image(systemName: "trash")
+                .foregroundColor(.red) }
             .buttonStyle(.plain)
         }
         .padding(4)
         .background(
             RoundedRectangle(cornerRadius: 4)
-                .fill(viewModel.hoveredClip?.id == clip.id ? Color(hex: "#094E9C") : Color.clear)
+                .fill(viewModel.hoveredClip?.id == clip.id ? Color(hex: "#2A84F2") : Color.clear)
         )
         .contentShape(Rectangle())
         .onTapGesture {
             viewModel.selection = clip
+            
+            let pb = NSPasteboard.general
+            pb.clearContents()
+            pb.setString(clip.content, forType: .string)
         }
     }
 }
-

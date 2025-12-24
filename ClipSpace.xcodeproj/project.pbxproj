@@ -34,8 +34,8 @@
 		E134C6BA2EF7FC040056153E /* HotkeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134C6B72EF7FC040056153E /* HotkeyService.swift */; };
 		E134C6BB2EF7FC040056153E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134C6B62EF7FC040056153E /* Colors.swift */; };
 		E134C6BD2EF809DC0056153E /* DetailPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134C6BC2EF809DC0056153E /* DetailPopoverView.swift */; };
-		E134C6C12EFB01750056153E /* WindowPositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134C6C02EFB01750056153E /* WindowPositioner.swift */; };
 		E134C6C32EFB03540056153E /* DateFormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134C6C22EFB03540056153E /* DateFormatterHelper.swift */; };
+		E134C6C52EFBCB860056153E /* WindowPositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134C6C42EFBCB860056153E /* WindowPositioner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,8 +67,8 @@
 		E134C6B72EF7FC040056153E /* HotkeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyService.swift; sourceTree = "<group>"; };
 		E134C6B82EF7FC040056153E /* PasteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteService.swift; sourceTree = "<group>"; };
 		E134C6BC2EF809DC0056153E /* DetailPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPopoverView.swift; sourceTree = "<group>"; };
-		E134C6C02EFB01750056153E /* WindowPositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPositioner.swift; sourceTree = "<group>"; };
 		E134C6C22EFB03540056153E /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
+		E134C6C42EFBCB860056153E /* WindowPositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPositioner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,7 +185,7 @@
 		E134C6A92EF7FBD50056153E /* Clipboard View */ = {
 			isa = PBXGroup;
 			children = (
-				E134C6C02EFB01750056153E /* WindowPositioner.swift */,
+				E134C6C42EFBCB860056153E /* WindowPositioner.swift */,
 				E134C6902EF7FBAC0056153E /* ClipboardView.swift */,
 				E134C6912EF7FBAC0056153E /* ClippingRow.swift */,
 				E134C6942EF7FBAC0056153E /* SearchField.swift */,
@@ -288,7 +288,6 @@
 			files = (
 				E134C6BD2EF809DC0056153E /* DetailPopoverView.swift in Sources */,
 				E134C6782EF7FAF00056153E /* ClipSpaceApp.swift in Sources */,
-				E134C6C12EFB01750056153E /* WindowPositioner.swift in Sources */,
 				E134C6962EF7FBAC0056153E /* ClippingRow.swift in Sources */,
 				E134C6982EF7FBAC0056153E /* ClipboardView.swift in Sources */,
 				E134C6AC2EF7FBE50056153E /* SettingsViewModel.swift in Sources */,
@@ -304,6 +303,7 @@
 				E134C68E2EF7FBA00056153E /* SettingsStoreProtocol.swift in Sources */,
 				E134C68F2EF7FBA00056153E /* ClippingStoreProtocol.swift in Sources */,
 				E134C6872EF7FB8B0056153E /* Hotkey.swift in Sources */,
+				E134C6C52EFBCB860056153E /* WindowPositioner.swift in Sources */,
 				E134C6B22EF7FBFB0056153E /* ClippingFileStore.swift in Sources */,
 				E134C6B32EF7FBFB0056153E /* Strings.swift in Sources */,
 				E134C6B42EF7FBFB0056153E /* SettingsUserDefaultsStore.swift in Sources */,

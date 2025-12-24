@@ -39,16 +39,19 @@ struct DetailPopoverView: View {
                         .bold()
                         .foregroundColor(.secondary)
                     
-                    Text(DateFormatterHelper.shared.formattedDate(date)) .font(.caption2) .foregroundColor(.gray) .multilineTextAlignment(.trailing) }
+                    Text(DateFormatterHelper.shared.formattedDate(clip.createdAt))
+                        .font(.caption2)
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.trailing)
+                }
             }
         }
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 8)
             //                .fill(Color(.windowBackgroundColor))
-                .fill(Color(hex: "#094E9C"))
+                .fill(Color(hex: "#2A84F2"))
         )
-        .shadow(radius: 4)
-        .frame(maxWidth: 320)
+         .frame(maxWidth: 320)
     }
 }

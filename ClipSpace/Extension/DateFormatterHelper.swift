@@ -14,7 +14,7 @@ final class DateFormatterHelper {
     private init() {}
 
     func formattedDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
+        let formatter = Foundation.DateFormatter() // ✅ use real DateFormatter
 
         if calendar.isDateInToday(date) {
             formatter.dateFormat = "'Today,' HH:mm:ss"
@@ -23,7 +23,7 @@ final class DateFormatterHelper {
             formatter.dateFormat = "'Yesterday,' HH:mm:ss"
             return formatter.string(from: date)
         } else {
-            formatter.dateFormat = "EEEE, HH:mm:ss" // weekday name
+            formatter.dateFormat = "EEEE, HH:mm:ss"
             return formatter.string(from: date)
         }
     }

@@ -14,7 +14,7 @@ struct Clipping: Identifiable, Codable, Equatable, Hashable {
     var content: String
     var richRTF: Data?
     var sourceAppBundleID: String?
-    let createdAt: Date
+    var createdAt: Date = Date()
     var isPinned: Bool
     
     init(id: UUID = UUID(), content: String, richRTF: Data? = nil, sourceAppBundleID: String? = nil, createdAt: Date = Date(), isPinned: Bool = false) {

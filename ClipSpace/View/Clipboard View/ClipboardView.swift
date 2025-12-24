@@ -15,6 +15,7 @@ struct ClipboardView: View {
     
     var body: some View {
         VStack(spacing: 8) {
+                                   
             // Search bar
             SearchField(text: Binding(
                 get: { viewModel.query },
@@ -87,10 +88,11 @@ struct ClipboardView: View {
         }
         .padding(8)
         .frame(
-            minHeight: min(viewModel.contentViewHeight, NSScreen.main?.visibleFrame.height ?? 600),
+            minHeight: min(viewModel.contentHeight, NSScreen.main?.visibleFrame.height ?? 600),
             maxHeight: NSScreen.main?.visibleFrame.height ?? 600
         )
         .frame(width: 700)
+        //.background(WindowPositioner())
     }
     
     private func openPreferences() {

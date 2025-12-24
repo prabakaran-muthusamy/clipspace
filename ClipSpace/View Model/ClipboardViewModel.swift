@@ -44,16 +44,33 @@ final class ClipboardViewModel: ObservableObject {
         clippings = repository.fetch(query: query)
     }
     
+//    func togglePin(_ clip: Clipping) {
+//        var updated = clip
+//        updated.isPinned.toggle()
+//        repository.update(updated)
+//        reload()
+//    }
+//    
+//    func delete(_ clip: Clipping) {
+//        repository.delete(id: clip.id)
+//        reload()
+//    }
+    
     func togglePin(_ clip: Clipping) {
-        var updated = clip
-        updated.isPinned.toggle()
-        repository.update(updated)
-        reload()
+        if let idx = clippings.firstIndex(where: { $0.id == clip.id }) {
+            clippings[idx].isPinned.toggle()
+        }
     }
     
     func delete(_ clip: Clipping) {
-        repository.delete(id: clip.id)
-        reload()
+        clippings.removeAll {$0.id == clip.id }
+        if selection?.id == clip.id {
+            selection = nil
+        }
+        
+        if hoveredClip?.id == clip.id {
+            hoveredClip = nil
+        }
     }
     
     func deleteAll() {
